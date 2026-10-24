@@ -1,0 +1,86 @@
+# Taco Palace Order System
+
+# Tuples store each food item's name and price.
+menu_items = (
+    ("Taco", 4.50),
+    ("Burrito", 5.50),
+    ("Nachos", 3.50),
+    ("Soft Drink", 1.95)
+)
+
+
+def display_menu():
+    print("Taco Palace Menu")
+    print("1. Taco")
+    print("2. Burrito")
+    print("3. Nachos")
+    print("4. Soft Drink")
+    print("5. Quit")
+
+
+def get_price(selection):
+    # Retrieve price from the tuple.
+    if selection >= 1 and selection <= 4:
+        return menu_items[selection - 1][1]
+    else:
+        return 0.00
+
+
+def get_item_name(selection):
+    # Retrieve name from the tuple.
+    if selection >= 1 and selection <= 4:
+        return menu_items[selection - 1][0]
+    else:
+        return ""
+
+
+def main():
+    # List stores items ordered by the customer.
+    ordered_items = []
+    total = 0.00
+
+    print("Welcome to Taco Palace, please view the menu below "
+          "and enter the number that represents your selection.")
+
+    while True:
+        display_menu()
+
+        try:
+            selection = int(input("\nEnter your selection: "))
+        except ValueError:
+            print("Invalid input. Please enter a number from 1 to 5.")
+            continue
+
+        if selection == 5:
+            break
+
+        elif selection >= 1 and selection <= 4:
+            item_name = get_item_name(selection)
+            price = get_price(selection)
+
+            if selection == 1:
+                print(f"You have selected a {item_name}.")
+            else:
+                print(f"You have selected {item_name}.")
+
+            ordered_items.append(item_name)
+            total += price
+
+        else:
+            print("Invalid selection. Please choose a number from 1 to 5.")
+
+    print("\n----- Your Final Order -----")
+
+    if ordered_items:
+        print("You ordered:")
+        for item in ordered_items:
+            print(f"- {item}")
+    else:
+        print("You did not order any items.")
+
+    print(f"Your total is ${total:.2f}")
+    print("Thank you for visiting Taco Palace!")
+
+
+if __name__ == "__main__":
+    main()
